@@ -1,0 +1,17 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@app/consul": "<rootDir>/../libs/consul/src",
+    "@app/consul/(.*)": "<rootDir>/../libs/consul/src/$1"
+  }
+}

@@ -1,0 +1,80 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Student {
+  """学生id"""
+  id: ID!
+
+  """学生姓名"""
+  name: String!
+  age: Int!
+  email: String!
+  teacherId: String!
+}
+
+"""表示一个教师实体及其关联的学生。"""
+type Teacher {
+  """教师的唯一标识符。"""
+  id: ID!
+
+  """教师的全名。"""
+  name: String!
+
+  """教师的年龄。"""
+  age: Int
+
+  """由该教师教授的学生列表。如果没有关联的学生，则可以为空。"""
+  students: [Student!]
+}
+
+type Query {
+  """查询所有教师"""
+  teachers: [Teacher!]!
+
+  """根据id查询教师"""
+  teacher(id: String!): Teacher!
+
+  """查询所有学生"""
+  students: [Student!]! @deprecated(reason: "过时的API")
+
+  """根据id查询学生"""
+  student(id: String!): Student!
+}
+
+type Mutation {
+  """创建用户"""
+  createTeacher(createTeacherInput: CreateTeacherInput!): Teacher!
+
+  """更新教师"""
+  updateTeacher(updateTeacherInput: UpdateTeacherInput!): Teacher!
+
+  """根据id删除"""
+  removeTeacher(id: String!): Teacher!
+
+  """创建学生"""
+  createStudent(createStudentInput: CreateStudentInput!): Student!
+
+  """根据id删除学生"""
+  updateStudent(id: String!): Student!
+}
+
+input CreateTeacherInput {
+  name: String!
+  age: Float!
+  email: String!
+}
+
+input UpdateTeacherInput {
+  name: String
+  age: Float
+  email: String
+  id: Int!
+}
+
+input CreateStudentInput {
+  name: String!
+  age: Float!
+  email: String!
+  teacherId: String!
+}

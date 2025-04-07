@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/main-app/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/main-app/tsconfig.app.json"
+  },
+  "projects": {
+    "consul": {
+      "type": "library",
+      "root": "libs/consul",
+      "entryFile": "index",
+      "sourceRoot": "libs/consul/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/consul/tsconfig.lib.json"
+      }
+    },
+    "main-app": {
+      "type": "application",
+      "root": "apps/main-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/main-app/src",
+      "compilerOptions": {
+        "assets": [
+          {
+            "include": "../.env",
+            "outDir": "./dist/apps/main-app/.env"
+          }
+        ],
+        "tsConfigPath": "apps/main-app/tsconfig.app.json"
+      }
+    },
+    "order-app": {
+      "type": "application",
+      "root": "apps/order-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/order-app/src",
+      "compilerOptions": {
+        "assets": [
+          {
+            "include": "../.env",
+            "outDir": "./dist/apps/order-app/.env"
+          }
+        ],
+        "tsConfigPath": "apps/order-app/tsconfig.app.json"
+      }
+    },
+    "user-app": {
+      "type": "application",
+      "root": "apps/user-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/user-app/src",
+      "compilerOptions": {
+        "assets": [
+          {
+            "include": "../.env",
+            "outDir": "./dist/apps/user-app/.env"
+          }
+        ],
+        "watchAssets": true,
+        "tsConfigPath": "apps/user-app/tsconfig.app.json"
+      }
+    }
+  },
+  "monorepo": true,
+  "root": "apps/main-app"
+}

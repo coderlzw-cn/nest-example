@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Teacher {
+  id        String   @id @default(uuid())
+  name      String
+  age       Int
+  email     String   @unique
+  createdAt DateTime @default(now()) @db.DateTime(0)
+  updatedAt DateTime @updatedAt @db.DateTime(0)
+  students  Student[] // 一个教师可以有多个学生
+  @@map("teacher")
+}
+
+model Student {
+  id        String   @id @default(uuid())
+  name      String
+  age       Int
+  email     String   @unique
+  teacherId String   @map("teacher_id")
+  teacher   Teacher  @relation(fields: [teacherId], references: [id]) // 一个学生只有一个教师
+  createdAt DateTime @default(now()) @db.DateTime(0)
+  updatedAt DateTime @updatedAt @db.DateTime(0)
+
+  @@map("student")
+}
